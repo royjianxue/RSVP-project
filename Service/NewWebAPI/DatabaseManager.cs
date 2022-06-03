@@ -34,8 +34,7 @@ namespace NewWebAPI
             CreateTable();
         }
         public static void CreateTable()
-        {
-          
+        {         
             using (var conn = CreatConnection())
             {
                 using (var cmd = conn.CreateCommand())
