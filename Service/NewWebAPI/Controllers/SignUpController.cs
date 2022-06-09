@@ -18,7 +18,7 @@ namespace ASP.NET.CORE.WEBAPI.Controllers
         }
 
         [HttpGet]
-        [Route("GetByID/{participantid}")]
+        [Route("ID/{participantid}")]
         public ActionResult<List<Participant>> GetParticipantByID(int participantId)
         {
 
