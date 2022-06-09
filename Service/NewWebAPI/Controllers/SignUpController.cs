@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using NewWebAPI.Models;
+﻿using Common.Contracts.Model;
+using Microsoft.AspNetCore.Mvc;
 using System.Data;
+using BusinessProviders.Business;
 
 namespace NewWebAPI.Controllers
 {
@@ -8,48 +9,49 @@ namespace NewWebAPI.Controllers
     [Route("api/SignUp")]
     public class SignUpController : ControllerBase
     {
+        BusinessLogic business = new BusinessLogic();
+
         [HttpGet]
         public List<Participant> GetALLParticipants()
         {
-            return DatabaseManager.LoadParticipantsFromDB();
+            return business.GetAllRecord();
         }
 
         [HttpGet]
         [Route("GetByID/{participantid}")]
         public List<Participant>GetParticipantByID(int participantId)
         {
-            return DatabaseManager.LoadParticipantsFromDB().Where(p => p.Id == participantId).ToList();
+            return business.GetRecordById(participantId);
         }
 
         [HttpPost]
         [Route("Post")]
-        public string PostParticipants(Participant participant)
+        public void PostParticipants(Participant participant)
         {
-
-            return DatabaseManager.InsertData(participant);
+            business.PostRecord(participant);
  
         }
 
         [HttpDelete]
         [Route("DeleteAll")]
-        public string DeleteAll()
-        {           
-            return DatabaseManager.DeleteAllData();     
+        public void DeleteAll()
+        {
+            business.DeleteAllRecord();
         }
 
 
         [HttpDelete]
         [Route("Delete/{participantid}")]
-        public string DeleteParticipants(int participantId)
+        public void DeleteParticipants(int participantId)
         {
-            return DatabaseManager.DeleteById(participantId);
+            business.DeleteRecordById(participantId);
         }
 
         [HttpPut]
         [Route("Update/{participantid}")]
-        public string UpdateParticipants(int participantId, Participant participant)
+        public void UpdateParticipants(int participantId, Participant participant)
         {
-            return DatabaseManager.UpdateData(participantId, participant);  
+            business.UpdateRecord(participantId, participant);  
         }
 
        

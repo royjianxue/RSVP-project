@@ -1,4 +1,4 @@
-﻿namespace NewWebAPI.Models
+﻿namespace Common.Contracts.Model
 {
     public class Participant
     {

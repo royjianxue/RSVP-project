@@ -1,17 +1,12 @@
 ﻿using Microsoft.Data.SqlClient;
 using System.Data;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Configuration;
-using NewWebAPI.Models;
+using Common.Contracts.Model;
 
-namespace NewWebAPI
+namespace DataProviders.Data
 {
     public class DatabaseManager
     {
-
-       
-
-        static string connectionString = "Server=(localdb)\\MSSQLLocalDB;Integrated Security=true;"; 
+        static string connectionString = "Server=(localdb)\\MSSQLLocalDB;Integrated Security=true;";
         public static SqlConnection CreatConnection()
         {
             var conn = new SqlConnection(connectionString);
@@ -34,7 +29,7 @@ namespace NewWebAPI
             CreateTable();
         }
         public static void CreateTable()
-        {         
+        {
             using (var conn = CreatConnection())
             {
                 using (var cmd = conn.CreateCommand())
@@ -58,7 +53,7 @@ namespace NewWebAPI
         {
             List<Participant> participants = new List<Participant>();
 
-            using (var conn = DatabaseManager.CreatConnection())
+            using (var conn = CreatConnection())
             {
                 using (var cmd = conn.CreateCommand())
                 {
@@ -86,7 +81,7 @@ namespace NewWebAPI
             return participants;
         }
 
-        public static string InsertData(Participant participant)
+        public static void InsertData(Participant participant)
         {
             using (var conn = CreatConnection())
             {
@@ -101,10 +96,9 @@ namespace NewWebAPI
                     cmd.ExecuteNonQuery();
                 }
             }
-            return "Participant Added Successfully";
         }
 
-        public static string DeleteAllData()
+        public static void DeleteAllData()
         {
             using (var conn = CreatConnection())
             {
@@ -115,17 +109,10 @@ namespace NewWebAPI
                     cmd.ExecuteNonQuery();
                 }
             }
-            return "Participants Deleted Successfully";
         }
 
-        public static string DeleteById(int participantId)
+        public static void DeleteById(int participantId)
         {
-            var checkDatabase = LoadParticipantsFromDB().Where(p => p.Id == participantId).ToList();
-
-            if (checkDatabase.Count() == 0)
-            {
-                return "Id Not Found";
-            }
             using (var conn = CreatConnection())
             {
                 using (var cmd = conn.CreateCommand())
@@ -135,17 +122,10 @@ namespace NewWebAPI
                     cmd.ExecuteNonQuery();
                 }
             }
-            return "Participant Deleted Successfully";
         }
 
-        public static string UpdateData(int participantId, Participant participant)
+        public static void UpdateData(int participantId, Participant participant)
         {
-            var checkDatabase = LoadParticipantsFromDB().Where(P => P.Id == participantId).ToList();
-
-            if (checkDatabase.Count() == 0)
-            {
-                return "Id Not Found";
-            }
             using (var conn = CreatConnection())
             {
                 using (var cmd = conn.CreateCommand())
@@ -159,7 +139,6 @@ namespace NewWebAPI
                     cmd.ExecuteNonQuery();
                 }
             }
-            return "Participant Updated Successfully";
         }
 
     }

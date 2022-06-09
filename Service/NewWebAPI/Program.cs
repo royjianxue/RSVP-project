@@ -1,4 +1,4 @@
-using NewWebAPI;
+using DataProviders.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
