@@ -27,22 +27,14 @@ namespace BusinessProviders.Business
         public void DeleteRecordById(int participantId)
         {
 
-           DatabaseManager.DeleteById(participantId);
+            DatabaseManager.DeleteById(participantId);
         
         }
 
         public void UpdateRecord(int participantId, Participant participant)
         {
-            var checkDatabase = DatabaseManager.LoadParticipantsFromDB().Where(P => P.Id == participantId).ToList();
-
-            if (checkDatabase.Count() == 0)
-            {
-                //return "Id Not Found";
-            }
-            else
-            {
-                DatabaseManager.UpdateData(participantId, participant);
-            }
+            DatabaseManager.UpdateData(participantId, participant);
+       
         }
 
     }

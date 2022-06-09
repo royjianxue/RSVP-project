@@ -21,7 +21,6 @@ namespace ASP.NET.CORE.WEBAPI.Controllers
         [Route("ID/{participantid}")]
         public ActionResult<List<Participant>> GetParticipantByID(int participantId)
         {
-
             var record = business.GetRecordById(participantId);
 
             if (record.Count() == 0)
@@ -50,7 +49,6 @@ namespace ASP.NET.CORE.WEBAPI.Controllers
 
             return NoContent();
         }
-
 
         [HttpDelete]
         [Route("Delete/{participantid}")]
@@ -82,8 +80,6 @@ namespace ASP.NET.CORE.WEBAPI.Controllers
             business.UpdateRecord(participantId, participant);
 
             return NoContent();  
-        }
-
-       
+        }   
     }
 }
