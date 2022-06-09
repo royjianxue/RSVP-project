@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Common.Contracts.Model;
+﻿using Common.Contracts.Model;
 using DataProviders.Data;
 
 namespace BusinessProviders.Business

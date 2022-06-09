@@ -1,5 +1,4 @@
 ﻿using Microsoft.Data.SqlClient;
-using System.Data;
 using Common.Contracts.Model;
 
 namespace DataProviders.Data
