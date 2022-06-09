@@ -16,7 +16,7 @@ namespace BusinessProviders.Business
         }
         public List<Participant> GetRecordById(int participantId)
         {
-            return DatabaseManager.LoadParticipantsFromDB().Where(p => p.Id == participantId).ToList();
+           return DatabaseManager.LoadParticipantsFromDB().Where(p => p.Id == participantId).ToList();
         }
 
         public void PostRecord(Participant participant)
@@ -31,16 +31,9 @@ namespace BusinessProviders.Business
 
         public void DeleteRecordById(int participantId)
         {
-            var checkDatabase = DatabaseManager.LoadParticipantsFromDB().Where(p => p.Id == participantId).ToList();
 
-            if (checkDatabase.Count() == 0)
-            {
-                // return "Id Not Found";
-            }
-            else
-            {
-                DatabaseManager.DeleteById(participantId);
-            }           
+           DatabaseManager.DeleteById(participantId);
+        
         }
 
         public void UpdateRecord(int participantId, Participant participant)

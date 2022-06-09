@@ -1,9 +1,9 @@
 ﻿using Common.Contracts.Model;
 using Microsoft.AspNetCore.Mvc;
-using System.Data;
 using BusinessProviders.Business;
 
-namespace NewWebAPI.Controllers
+
+namespace ASP.NET.CORE.WEBAPI.Controllers
 {
     [ApiController]
     [Route("api/SignUp")]
@@ -19,39 +19,69 @@ namespace NewWebAPI.Controllers
 
         [HttpGet]
         [Route("GetByID/{participantid}")]
-        public List<Participant>GetParticipantByID(int participantId)
+        public ActionResult<List<Participant>> GetParticipantByID(int participantId)
         {
-            return business.GetRecordById(participantId);
+
+            var record = business.GetRecordById(participantId);
+
+            if (record.Count() == 0)
+            {
+                return NotFound();
+            }
+
+            return Ok(business.GetRecordById(participantId));
         }
 
         [HttpPost]
         [Route("Post")]
-        public void PostParticipants(Participant participant)
+        public ActionResult PostParticipants(Participant participant)
         {
             business.PostRecord(participant);
- 
+
+            return StatusCode(201);
+
         }
 
         [HttpDelete]
         [Route("DeleteAll")]
-        public void DeleteAll()
+        public ActionResult DeleteAll()
         {
             business.DeleteAllRecord();
+
+            return NoContent();
         }
 
 
         [HttpDelete]
         [Route("Delete/{participantid}")]
-        public void DeleteParticipants(int participantId)
+        public ActionResult DeleteParticipants(int participantId)
         {
+            var record = business.GetRecordById(participantId);
+
+            if (record.Count() == 0)
+            {
+                return NotFound();
+            }
+
             business.DeleteRecordById(participantId);
+
+            return NoContent();
         }
 
         [HttpPut]
         [Route("Update/{participantid}")]
-        public void UpdateParticipants(int participantId, Participant participant)
+        public ActionResult UpdateParticipants(int participantId, Participant participant)
         {
-            business.UpdateRecord(participantId, participant);  
+            var record = business.GetRecordById(participantId);
+
+            if (record.Count() == 0)
+            {
+                return NotFound();
+            }
+
+            business.UpdateRecord(participantId, participant);
+
+            return NoContent();  
         }
 
        
