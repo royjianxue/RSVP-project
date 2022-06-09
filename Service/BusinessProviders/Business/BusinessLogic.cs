@@ -26,15 +26,12 @@ namespace BusinessProviders.Business
 
         public void DeleteRecordById(int participantId)
         {
-
-            DatabaseManager.DeleteById(participantId);
-        
+            DatabaseManager.DeleteById(participantId);       
         }
 
         public void UpdateRecord(int participantId, Participant participant)
         {
             DatabaseManager.UpdateData(participantId, participant);
-       
         }
 
     }
