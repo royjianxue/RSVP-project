@@ -13,26 +13,21 @@ namespace BusinessProviders.Business
         {
            return DatabaseManager.LoadParticipantsFromDB().Where(p => p.Id == participantId).ToList();
         }
-
         public void PostRecord(Participant participant)
         {
             DatabaseManager.InsertData(participant);
         }
-
         public void DeleteAllRecord()
         {
             DatabaseManager.DeleteAllData();
         }
-
         public void DeleteRecordById(int participantId)
         {
             DatabaseManager.DeleteById(participantId);       
         }
-
         public void UpdateRecord(int participantId, Participant participant)
         {
             DatabaseManager.UpdateData(participantId, participant);
         }
-
     }
 }
