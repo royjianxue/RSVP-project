@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using SignUpFormWPF.Models;
+using Common.Contract.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System.Text.Json;

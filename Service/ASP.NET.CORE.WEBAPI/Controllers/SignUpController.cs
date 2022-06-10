@@ -9,33 +9,41 @@ namespace ASP.NET.CORE.WEBAPI.Controllers
     [Route("api/SignUp")]
     public class SignUpController : ControllerBase
     {
-        BusinessLogic business = new BusinessLogic();
+        //SignUpProvider business = new SignUpProvider();
+        private readonly ISignUpProvider _signUpProvider;
+
+        public SignUpController(ISignUpProvider signUpProvider)
+        {
+            _signUpProvider = signUpProvider;
+            
+        }
+
 
         [HttpGet]
         public List<Participant> GetALLParticipants()
         {
-            return business.GetAllRecord();
+            return _signUpProvider.GetAllRecord();
         }
 
         [HttpGet]
         [Route("ID/{participantid}")]
         public ActionResult<List<Participant>> GetParticipantByID(int participantId)
         {
-            var record = business.GetRecordById(participantId);
+            var record = _signUpProvider.GetRecordById(participantId);
 
             if (record.Count() == 0)
             {
                 return NotFound();
             }
 
-            return Ok(business.GetRecordById(participantId));
+            return Ok(_signUpProvider.GetRecordById(participantId));
         }
 
         [HttpPost]
         [Route("Post")]
         public ActionResult PostParticipants(Participant participant)
         {
-            business.PostRecord(participant);
+            _signUpProvider.PostRecord(participant);
 
             return StatusCode(201);
 
@@ -45,7 +53,7 @@ namespace ASP.NET.CORE.WEBAPI.Controllers
         [Route("DeleteAll")]
         public ActionResult DeleteAll()
         {
-            business.DeleteAllRecord();
+            _signUpProvider.DeleteAllRecord();
 
             return NoContent();
         }
@@ -54,14 +62,14 @@ namespace ASP.NET.CORE.WEBAPI.Controllers
         [Route("Delete/{participantid}")]
         public ActionResult DeleteParticipants(int participantId)
         {
-            var record = business.GetRecordById(participantId);
+            var record = _signUpProvider.GetRecordById(participantId);
 
             if (record.Count() == 0)
             {
                 return NotFound();
             }
 
-            business.DeleteRecordById(participantId);
+            _signUpProvider.DeleteRecordById(participantId);
 
             return NoContent();
         }
@@ -70,16 +78,16 @@ namespace ASP.NET.CORE.WEBAPI.Controllers
         [Route("Update/{participantid}")]
         public ActionResult UpdateParticipants(int participantId, Participant participant)
         {
-            var record = business.GetRecordById(participantId);
+            var record = _signUpProvider.GetRecordById(participantId);
 
             if (record.Count() == 0)
             {
                 return NotFound();
             }
 
-            business.UpdateRecord(participantId, participant);
+            _signUpProvider.UpdateRecord(participantId, participant);
 
-            return NoContent();  
-        }   
+            return NoContent();
+        }
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SignUpFormWPF.Models
+namespace Common.Contract.Models
 {
     public class Participant
     {
