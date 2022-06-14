@@ -18,7 +18,6 @@ namespace ASP.NET.CORE.WEBAPI.Controllers
             
         }
 
-
         [HttpGet]
         public List<Participant> GetALLParticipants()
         {
