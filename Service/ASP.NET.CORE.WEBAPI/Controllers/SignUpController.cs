@@ -45,7 +45,7 @@ namespace ASP.NET.CORE.WEBAPI.Controllers
         {
             _signUpProvider.PostRecord(participant);
 
-            return StatusCode(201);
+            return Ok();
 
         }
 
@@ -55,7 +55,7 @@ namespace ASP.NET.CORE.WEBAPI.Controllers
         {
             _signUpProvider.DeleteAllRecord();
 
-            return NoContent();
+            return Ok();
         }
 
         [HttpDelete]
@@ -71,7 +71,7 @@ namespace ASP.NET.CORE.WEBAPI.Controllers
 
             _signUpProvider.DeleteRecordById(participantId);
 
-            return NoContent();
+            return Ok();
         }
 
         [HttpPut]
@@ -87,7 +87,7 @@ namespace ASP.NET.CORE.WEBAPI.Controllers
 
             _signUpProvider.UpdateRecord(participantId, participant);
 
-            return NoContent();
+            return Ok();
         }
     }
 }
