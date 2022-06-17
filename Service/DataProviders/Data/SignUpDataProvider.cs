@@ -1,14 +1,21 @@
 ﻿using Microsoft.Data.SqlClient;
 using Common.Contracts.Model;
+using Microsoft.Extensions.Configuration;
 
 namespace DataProviders.Data
 {
     public class SignUpDataProvider : ISignUpDataProvider
     {
-        private readonly string connectionString = "Server=(localdb)\\MSSQLLocalDB;Integrated Security=true;";
+        private IConfiguration _configuration;
+
+        public SignUpDataProvider(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
 
         public SqlConnection CreatConnection()
         {
+            var connectionString = _configuration.GetConnectionString("Defaultconnection");
             var conn = new SqlConnection(connectionString);
             conn.Open();
             return conn;
