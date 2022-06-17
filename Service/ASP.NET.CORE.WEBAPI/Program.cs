@@ -1,8 +1,6 @@
 using BusinessProviders.Business;
 using DataProviders.Data;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using System.Diagnostics;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
